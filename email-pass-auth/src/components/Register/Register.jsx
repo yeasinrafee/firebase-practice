@@ -7,6 +7,7 @@ const auth = getAuth(app);
 
 const Register = () => {
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -14,6 +15,7 @@ const Register = () => {
     const password = event.target.password.value;
 
     setError("");
+    setSuccess("");
     if (password.length < 6) {
       setError("Password should be more than 6 character");
       return;
@@ -33,6 +35,8 @@ const Register = () => {
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
+        setError("");
+        setSuccess("Successfully Logged in.");
       })
       .catch((error) => {
         console.error(error);
@@ -62,6 +66,7 @@ const Register = () => {
         <input type="submit" value="Register" />
       </form>
       <p className="red">{error}</p>
+      <p className="green">{success}</p>
     </div>
   );
 };
